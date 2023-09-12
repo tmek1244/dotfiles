@@ -20,6 +20,7 @@ plug "zsh-users/zsh-syntax-highlighting"
 
 # keybinds
 bindkey '^ ' autosuggest-accept
+bindkey '^R' history-incremental-search-backward
 
 export PATH="$HOME/.local/bin":$PATH
 
