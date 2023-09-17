@@ -18,6 +18,9 @@ plug "zap-zsh/fzf"
 plug "zap-zsh/exa"
 plug "zsh-users/zsh-syntax-highlighting"
 
+# plugins config
+ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+
 # keybinds
 bindkey '^ ' autosuggest-accept
 bindkey '^R' history-incremental-search-backward
