@@ -19,6 +19,11 @@ lvim.keys.normal_mode["<C-l>"] = "<C-w>l"
 lvim.builtin.which_key.mappings.g["s"] = {
   "<cmd>Telescope git_status<cr>", "Git status"
 }
+
+lvim.builtin.treesitter.ensure_installed = {
+  "python"
+}
+
 lvim.builtin.which_key.mappings["v"] = {
   name = "Python",
   e = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
@@ -27,7 +32,8 @@ lvim.builtin.which_key.mappings["v"] = {
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   {
-    name = "black"
+    name = "black",
+    args = { "--line-length 80" }
   },
 }
 
@@ -35,13 +41,20 @@ local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
     command = "flake8",
-    filetypes = { "python" }
+    filetypes = { "python" },
+    args = { "--extend-ignore=E203" }
   }
 }
 
 lvim.plugins = {
   {
-    -- "AckslD/swenv.nvim",
+    "AckslD/swenv.nvim",
     "stevearc/dressing.nvim"
   },
 }
+
+require('swenv').setup({
+  post_set_venv = function()
+    vim.cmd("LspRestart")
+  end,
+})
