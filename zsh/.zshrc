@@ -19,7 +19,8 @@ plug "zap-zsh/fzf"
 plug "zsh-users/zsh-syntax-highlighting"
 
 # plugins config
-ZSH_AUTOSUGGEST_STRATEGY=(completion history)
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
 
 # keybinds
 bindkey '^ ' autosuggest-accept

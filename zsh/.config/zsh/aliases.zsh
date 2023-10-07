@@ -22,3 +22,5 @@ alias pscpu='ps auxf | sort -nr -k 3 | head -5'
 
 alias m="git checkout master"
 
+alias wd='function _go_to_working_dir() { cd "$1" && source venv/bin/activate; }; _go_to_working_dir'
+
