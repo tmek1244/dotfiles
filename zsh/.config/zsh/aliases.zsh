@@ -24,3 +24,6 @@ alias m="git checkout master"
 
 alias wd='function _go_to_working_dir() { cd "$1" && source venv/bin/activate; }; _go_to_working_dir'
 
+# fix ssh
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
