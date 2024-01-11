@@ -15,10 +15,7 @@ return require('packer').startup(function(use)
 
   use { 
 	"catppuccin/nvim", 
-	as = "catppuccin", 
-	config = function()
-		vim.cmd('colorscheme "catppuccin"')
-	end
+	as = "catppuccin"
   }
 
   use {
@@ -27,6 +24,13 @@ return require('packer').startup(function(use)
 		  local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
 		  ts_update()
 	  end,
+  }
+
+  use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+          'nvim-tree/nvim-web-devicons', -- optional
+      },
   }
 
   use('mbbill/undotree')
@@ -54,6 +58,14 @@ return require('packer').startup(function(use)
           {'rafamadriz/friendly-snippets'},
 	  }
   }
+    
+  use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+  }
 
+  use { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' }
+
+  use 'github/copilot.vim'
 end)
 
