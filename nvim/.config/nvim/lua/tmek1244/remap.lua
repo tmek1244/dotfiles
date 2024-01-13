@@ -1,7 +1,7 @@
 -- LunarVim config
 
 vim.keymap.set("n", "<C-s>", ":w<cr>")
-vim.keymap.set("i", "<C-s>", ":w<cr>")
+vim.keymap.set("i", "<C-s>", "<esc>:w<cr>")
 
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
