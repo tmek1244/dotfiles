@@ -33,3 +33,5 @@ if command -v bat &> /dev/null; then
   alias catt="bat --theme \"Visual Studio Dark+\"" 
 fi
 
+. /usr/share/autojump/autojump.sh
+

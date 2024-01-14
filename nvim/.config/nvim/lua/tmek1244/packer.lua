@@ -75,5 +75,18 @@ return require('packer').startup(function(use)
   use 'github/copilot.vim'
   use 'knubie/vim-kitty-navigator'
 
+
+  --use {
+  --    'nvimdev/dashboard-nvim',
+  --    event = 'VimEnter',
+  --    config = function()
+  --        require('dashboard').setup {
+  --          theme = 'hyper', 
+  --        }
+  --    end,
+  --    requires = {'nvim-tree/nvim-web-devicons'}
+ -- }
+
+
 end)
 
