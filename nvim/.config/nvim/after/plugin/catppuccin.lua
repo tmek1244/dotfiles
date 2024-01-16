@@ -9,4 +9,3 @@
 --})
 
 vim.cmd.colorscheme "catppuccin"
-

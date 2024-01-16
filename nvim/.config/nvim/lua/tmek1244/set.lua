@@ -31,3 +31,8 @@ vim.opt.updatetime = 50
 
 vim.opt.splitright = true
 
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+    pattern = { "*" },
+    command = [[%s/\s\+$//e]],
+})
+
