@@ -10,15 +10,15 @@ return require('packer').startup(function(use)
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.5',
 	  -- or                            , branch = '0.1.x',
-	  requires = { 
+	  requires = {
           {'nvim-lua/plenary.nvim'},
           {'BurntSushi/ripgrep'},
           {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
       }
   }
 
-  use { 
-	"catppuccin/nvim", 
+  use {
+	"catppuccin/nvim",
 	as = "catppuccin"
   }
 
@@ -64,7 +64,9 @@ return require('packer').startup(function(use)
           {'rafamadriz/friendly-snippets'},
 	  }
   }
-    
+
+  use 'tmek1244/nvim-lspconfig'
+
   use {
       'nvim-lualine/lualine.nvim',
       requires = { 'nvim-tree/nvim-web-devicons', opt = true },
@@ -81,7 +83,7 @@ return require('packer').startup(function(use)
   --    event = 'VimEnter',
   --    config = function()
   --        require('dashboard').setup {
-  --          theme = 'hyper', 
+  --          theme = 'hyper',
   --        }
   --    end,
   --    requires = {'nvim-tree/nvim-web-devicons'}

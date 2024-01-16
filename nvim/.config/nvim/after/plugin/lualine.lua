@@ -20,7 +20,7 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diagnostics'},
-    lualine_c = {'filename'},
+    lualine_c = {},
     lualine_x = {'searchcount'},
     lualine_y = {'encoding', 'fileformat', 'filetype'},
     --lualine_y = {},
@@ -35,8 +35,22 @@ require('lualine').setup {
     lualine_z = {}
   },
   tabline = {},
-  winbar = {},
-  inactive_winbar = {},
+  winbar = {
+    lualine_a = {'filename'},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  inactive_winbar = {
+    lualine_a = {'filename'},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
   extensions = {}
 }
 
