@@ -76,7 +76,7 @@ return require('packer').startup(function(use)
 
   use 'github/copilot.vim'
   use 'knubie/vim-kitty-navigator'
-
+  use 'lewis6991/gitsigns.nvim'
 
   --use {
   --    'nvimdev/dashboard-nvim',

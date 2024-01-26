@@ -25,7 +25,7 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    custom = { "^.git$" }
   },
   on_attach = my_on_attach,
 })
