@@ -25,12 +25,13 @@ ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
 # keybinds
 bindkey '^ ' autosuggest-accept
 bindkey '^R' history-incremental-search-backward
+bindkey '^O' accept-line-and-down-history
 
 export PATH="$HOME/.local/bin":$PATH
 
 if command -v bat &> /dev/null; then
-  alias cat="bat -pp --theme \"Visual Studio Dark+\"" 
-  alias catt="bat --theme \"Visual Studio Dark+\"" 
+  alias cat="bat -pp --theme \"Visual Studio Dark+\""
+  alias catt="bat --theme \"Visual Studio Dark+\""
 fi
 
 . /usr/share/autojump/autojump.sh
