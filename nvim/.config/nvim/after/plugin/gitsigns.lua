@@ -40,4 +40,20 @@ require('gitsigns').setup {
   yadm = {
     enable = false
   },
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+        opts = opts or { noremap = true, silent = true }
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+    end
+
+    map('n', '<leader>hn', gs.next_hunk)
+    map('n', '<leader>hN', gs.prev_hunk)
+    map('n', '<leader>hh', gs.preview_hunk)
+    map('n', '<leader>hr', gs.reset_hunk)
+    map('n', '<leader>hR', gs.reset_buffer)
+    map('n', '<leader>hd', gs.diffthis)
+  end
 }
