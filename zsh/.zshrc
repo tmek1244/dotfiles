@@ -36,3 +36,4 @@ fi
 
 . /usr/share/autojump/autojump.sh
 
+export EDITOR=nvim
