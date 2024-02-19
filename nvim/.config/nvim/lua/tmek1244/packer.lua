@@ -78,6 +78,8 @@ return require('packer').startup(function(use)
   use 'knubie/vim-kitty-navigator'
   use 'lewis6991/gitsigns.nvim'
 
+  use 'numToStr/Comment.nvim'
+
   --use {
   --    'nvimdev/dashboard-nvim',
   --    event = 'VimEnter',
