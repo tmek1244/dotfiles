@@ -91,6 +91,7 @@ return require('packer').startup(function(use)
   --    requires = {'nvim-tree/nvim-web-devicons'}
  -- }
 
+ use 'rmagatti/auto-session'
 
 end)
 

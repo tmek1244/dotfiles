@@ -11,7 +11,7 @@ require("catppuccin").setup({
     highlight_overrides = {
         all = function(colors)
             return {
-                GitSignsChange = { fg = C.blue },
+                GitSignsChange = { fg = colors.blue },
             }
         end
     },
