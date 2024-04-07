@@ -29,6 +29,8 @@ require('mason-lspconfig').setup({
     'tsserver',
     'eslint',
     'html',
+    'pyright',
+    'pylsp',
   },
   handlers = {
     lsp_zero.default_setup,
