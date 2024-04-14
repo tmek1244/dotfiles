@@ -1,6 +1,6 @@
 local lsp_zero = require('lsp-zero')
 
-vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+vim.keymap.set("n", "<leader>gd", function() vim.diagnostic.open_float() end, opts)
 
 lsp_zero.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
