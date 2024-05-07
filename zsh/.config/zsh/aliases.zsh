@@ -42,7 +42,7 @@ function _launch_kitty_session() {
         return 1
     fi
 
-    nohup kitty --session "~/.config/kitty/sessions/${session_name}.conf" & disown
+    nohup kitty --session "~/.config/kitty/sessions/${session_name}.conf" >/dev/null 2>&1 & disown
     exit
 }
 
