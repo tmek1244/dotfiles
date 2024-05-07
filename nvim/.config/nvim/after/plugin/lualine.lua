@@ -36,7 +36,7 @@ require('lualine').setup {
   },
   tabline = {},
   winbar = {
-    lualine_a = {'filename'},
+    lualine_a = {{'filename', path=1}},
     lualine_b = {},
     lualine_c = {},
     lualine_x = {},
@@ -44,7 +44,7 @@ require('lualine').setup {
     lualine_z = {},
   },
   inactive_winbar = {
-    lualine_a = {'filename'},
+    lualine_a = {{'filename', path=1}},
     lualine_b = {},
     lualine_c = {},
     lualine_x = {},
