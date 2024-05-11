@@ -38,3 +38,5 @@ fi
 . /usr/share/autojump/autojump.sh
 
 export EDITOR=nvim
+
+eval "$(direnv hook zsh)"
