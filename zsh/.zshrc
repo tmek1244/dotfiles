@@ -9,8 +9,20 @@ fi
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
 
+bindkey -v
+
 # history
+HISTSIZE=5000
 HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
 # source
 plug "$HOME/.config/zsh/aliases.zsh"
@@ -22,9 +34,10 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/supercharge"
 plug "zap-zsh/vim"
 # plug "zap-zsh/zap-prompt"
-plug "zap-zsh/fzf"
+# plug "zap-zsh/fzf"
 # plug "zap-zsh/exa"
 plug "zsh-users/zsh-syntax-highlighting"
+plug "zsh-users/zsh-completions"
 plug "romkatv/powerlevel10k"
 
 # plugins config
@@ -35,6 +48,8 @@ ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
 bindkey '^ ' autosuggest-accept
 bindkey '^R' history-incremental-search-backward
 bindkey '^O' accept-line-and-down-history
+bindkey '^[[1;5A' history-search-backward
+bindkey '^[[1;5B' history-search-forward
 
 export PATH="$HOME/.local/bin":$PATH
 
@@ -50,4 +65,4 @@ export EDITOR=nvim
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-eval "$(direnv hook zsh)"
+# eval "$(direnv hook zsh)"
