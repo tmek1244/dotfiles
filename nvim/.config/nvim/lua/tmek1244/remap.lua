@@ -10,7 +10,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
 
 vim.keymap.set("n", "<leader>q", ":q<cr>", opts)
-vim.keymap.set("n", "<leader>ll", ":nohlsearch<cr>", opts)
+vim.keymap.set("n", "<Esc>", ":nohlsearch<cr>", opts)
 vim.keymap.set("n", "<leader>lw", "/<C-R><C-W><cr>``", opts)
 -- Primeagen config
 

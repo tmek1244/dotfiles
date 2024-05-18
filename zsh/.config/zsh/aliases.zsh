@@ -27,3 +27,23 @@ alias wd='function _go_to_working_dir() { cd "$1" && source venv/bin/activate; }
 # fix ssh
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
+
+function _launch_kitty_session() {
+    local session_name=$1
+
+    if [ -z "$session_name" ]; then
+        echo "Usage: _launch_kitty_session <session_name>"
+        return 1
+    fi
+
+    # check if session exists
+    if [ ! -f ~/.config/kitty/sessions/${session_name}.conf ]; then
+        echo "Session ${session_name} does not exist"
+        return 1
+    fi
+
+    nohup kitty --session "~/.config/kitty/sessions/${session_name}.conf" >/dev/null 2>&1 & disown
+    exit
+}
+
+alias ks="_launch_kitty_session"

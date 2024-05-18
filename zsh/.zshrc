@@ -15,6 +15,7 @@ HISTFILE=~/.zsh_history
 # source
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/exports.zsh"
+plug "$HOME/.config/zsh/custom_aliases.zsh"
 
 # plugins
 plug "zsh-users/zsh-autosuggestions"
@@ -48,3 +49,5 @@ export EDITOR=nvim
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+eval "$(direnv hook zsh)"
