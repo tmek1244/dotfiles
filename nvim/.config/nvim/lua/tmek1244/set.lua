@@ -31,6 +31,8 @@ vim.opt.updatetime = 50
 
 vim.opt.splitright = true
 
+vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
     pattern = { "*" },
     callback = function()

@@ -72,7 +72,7 @@ return require('packer').startup(function(use)
       requires = { 'nvim-tree/nvim-web-devicons', opt = true },
   }
 
-  use { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' }
+  -- use { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' }
 
   use 'github/copilot.vim'
   use 'knubie/vim-kitty-navigator'
@@ -92,6 +92,8 @@ return require('packer').startup(function(use)
  -- }
 
  use 'rmagatti/auto-session'
+
+ use 'jiangmiao/auto-pairs'
 
 end)
 
