@@ -51,7 +51,7 @@ bindkey '^O' accept-line-and-down-history
 bindkey '^[[1;5A' history-search-backward
 bindkey '^[[1;5B' history-search-forward
 
-export PATH="$HOME/.local/bin":$PATH
+export PATH="$HOME/.local/bin:/usr/local/go/bin":$PATH
 
 if command -v bat &> /dev/null; then
   alias cat="bat -pp --theme \"Visual Studio Dark+\""
