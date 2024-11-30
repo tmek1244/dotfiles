@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.5',
+	  'nvim-telescope/telescope.nvim', branch = '0.1.x',
 	  -- or                            , branch = '0.1.x',
 	  requires = {
           {'nvim-lua/plenary.nvim'},
@@ -41,31 +41,18 @@ return require('packer').startup(function(use)
 
   use('mbbill/undotree')
 
+  use('neovim/nvim-lspconfig')
+  use('hrsh7th/nvim-cmp')
+  use('hrsh7th/cmp-nvim-lsp')
+  use('hrsh7th/cmp-buffer')
+  use('hrsh7th/cmp-path')
+
+  use('williamboman/mason.nvim')
+  use('williamboman/mason-lspconfig.nvim')
+
   use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v3.x',
-	  requires = {
-		  --- Uncomment these if you want to manage the language servers from neovim
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
-
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'L3MON4D3/LuaSnip'},
-
-          {'hrsh7th/cmp-nvim-lsp'},
-          {'hrsh7th/cmp-buffer'},
-          {'hrsh7th/cmp-path'},
-          {'saadparwaiz1/cmp_luasnip'},
-          {'L3MON4D3/LuaSnip'},
-          {'rafamadriz/friendly-snippets'},
-	  }
+      "ray-x/lsp_signature.nvim",
   }
-
-  use 'tmek1244/nvim-lspconfig'
 
   use {
       'nvim-lualine/lualine.nvim',
@@ -94,6 +81,7 @@ return require('packer').startup(function(use)
  use 'rmagatti/auto-session'
 
  use 'jiangmiao/auto-pairs'
+ use 'Vimjas/vim-python-pep8-indent'
 
 end)
 

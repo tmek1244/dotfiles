@@ -52,6 +52,7 @@ bindkey '^[[1;5A' history-search-backward
 bindkey '^[[1;5B' history-search-forward
 
 export PATH="$HOME/.local/bin:/usr/local/go/bin":$PATH
+export PATH=$PATH:$(go env GOPATH)/bin
 
 if command -v bat &> /dev/null; then
   alias cat="bat -pp --theme \"Visual Studio Dark+\""
@@ -66,3 +67,4 @@ export EDITOR=nvim
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 # eval "$(direnv hook zsh)"
+. "/home/tmek1244/.deno/env"
