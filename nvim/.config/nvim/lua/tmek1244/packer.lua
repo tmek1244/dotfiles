@@ -61,7 +61,7 @@ return require('packer').startup(function(use)
 
   -- use { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' }
 
-  use 'github/copilot.vim'
+  -- use 'github/copilot.vim'
   use 'knubie/vim-kitty-navigator'
   use 'lewis6991/gitsigns.nvim'
 
