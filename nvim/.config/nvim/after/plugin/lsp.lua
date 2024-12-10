@@ -24,7 +24,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 
     require("lsp_signature").on_attach({
-      -- ... setup options here ...
+        toggle_key = '<A-l>',
+        hint_enable = false,
     }, event.buf)
   end,
 })

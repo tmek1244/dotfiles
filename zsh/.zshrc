@@ -67,4 +67,3 @@ export EDITOR=nvim
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 # eval "$(direnv hook zsh)"
-. "/home/tmek1244/.deno/env"

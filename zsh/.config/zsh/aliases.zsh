@@ -21,6 +21,10 @@ alias psmem='ps auxf | sort -nr -k 4 | head -5'
 alias pscpu='ps auxf | sort -nr -k 3 | head -5'
 
 alias m="git checkout master"
+alias gs="git status"
+alias gc="git commit"
+alias gp="git push"
+alias ga="git add"
 
 alias wd='function _go_to_working_dir() { cd "$1" && source venv/bin/activate; }; _go_to_working_dir'
 
