@@ -38,7 +38,8 @@ require('mason-lspconfig').setup({
     'html',
     'pyright',
     'pylsp',
-    'gopls'
+    'gopls',
+    'lua_ls',
   },
   handlers = {
     function(server_name)
@@ -75,6 +76,27 @@ cmp.setup({
     end,
   },
 })
+
+-- cmp.setup.cmdline('/', {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = {
+--         { name = 'buffer' }
+--     }
+-- })
+--
+-- cmp.setup.cmdline(':', {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = {
+--         {name = 'path'}
+--     }, {
+--         {
+--             name = 'cmdline',
+--             option = {
+--                 ignore_cmds = { 'Man', '!' }
+--             }
+--         }
+--     }
+-- })
 
 
 

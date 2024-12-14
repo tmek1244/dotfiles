@@ -14,10 +14,10 @@ vim.keymap.set("n", "<Esc>", ":nohlsearch<cr>", opts)
 vim.keymap.set("n", "<leader>lw", "/<C-R><C-W><cr>``", opts)
 -- Primeagen config
 
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", opts)
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", opts)
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
+vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", opts)
+vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", opts)
+vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", opts)
+vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", opts)
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
 vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
@@ -43,4 +43,5 @@ vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 
-
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")

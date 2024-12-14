@@ -1,18 +1,18 @@
 local builtin = require('telescope.builtin')
 
--- vim.keymap.set('n', '<leader>ff', function()
---     builtin.find_files({
+vim.keymap.set('n', '<leader>ff', function()
+    builtin.find_files({
+        hidden = true,
+        file_ignore_patterns = { '.git' }
+    })
+end, {})
+vim.keymap.set('n', '<C-p>', builtin.git_files, {})
+-- vim.keymap.set('n', '<leader>fs', function()
+--     builtin.live_grep({
 --         hidden = true,
 --         file_ignore_patterns = {'.git'}
 --     })
--- end, {})
-vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-vim.keymap.set('n', '<leader>fs', function()
-    builtin.live_grep({
-        hidden = true,
-        file_ignore_patterns = {'.git'}
-    })
-end)
+-- end)
 vim.keymap.set('n', '<leader>fg', builtin.git_status, {})
 
 local telescope = require('telescope')
@@ -30,6 +30,7 @@ telescope.setup({
         },
     },
 })
+telescope.load_extension("noice")
 
 
 local pickers = require "telescope.pickers"
@@ -63,7 +64,7 @@ local live_multigrep = function(opts)
 
             return vim.tbl_flatten {
                 args,
-                { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+                { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--hidden" },
             }
         end,
 
@@ -81,7 +82,7 @@ local live_multigrep = function(opts)
 end
 
 M.setup = function()
-    vim.keymap.set("n", "<leader>ff", live_multigrep)
+    vim.keymap.set("n", "<leader>fs", live_multigrep)
 end
 
 M.setup()
