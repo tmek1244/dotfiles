@@ -41,3 +41,5 @@ require('Comment').setup({
     ---Function to call after (un)comment
     post_hook = nil,
 })
+
+vim.keymap.set("i", "<C-/>", function() require('Comment.api').toggle.linewise.current() end, { noremap = true, silent = true })
