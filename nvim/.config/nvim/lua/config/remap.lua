@@ -4,10 +4,10 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<C-s>", ":w<cr>", opts)
 vim.keymap.set("i", "<C-s>", "<esc>:w<cr>", opts)
 
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+vim.keymap.set("n", "<C-h>", ":KittyNavigateLeft<CR>", opts)
+vim.keymap.set("n", "<C-j>", ":KittyNavigateUp<CR>", opts)
+vim.keymap.set("n", "<C-k>", ":KittyNavigateDown<CR>", opts)
+vim.keymap.set("n", "<C-l>", ":KittyNavigateRight<CR>", opts)
 
 vim.keymap.set("n", "<leader>q", ":q<cr>", opts)
 vim.keymap.set("n", "<Esc>", ":nohlsearch<cr>", opts)
