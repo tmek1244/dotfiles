@@ -40,6 +40,7 @@ return {
                 desc = 'LSP actions',
                 callback = function(event)
                     local opts = { buffer = event.buf }
+                    vim.keymap.set("n", "<leader>gd", function() vim.diagnostic.open_float() end, opts)
 
                     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
                     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
@@ -53,7 +54,7 @@ return {
                     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 
                     -- require("lsp_signature").on_attach({
-                        -- toggle_key = '<A-l>',
+                    -- toggle_key = '<A-l>',
                     --     hint_enable = false,
                     -- }, event.buf)
                 end,
@@ -61,4 +62,3 @@ return {
         end,
     }
 }
-
