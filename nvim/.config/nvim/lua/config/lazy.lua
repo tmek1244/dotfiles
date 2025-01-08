@@ -30,7 +30,8 @@ require("lazy").setup({
         -- { import = "lazyvim.plugins.extras.editor.fzf" },
         -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
         { import = "config.plugins" },
-        { "knubie/vim-kitty-navigator" }
+        { "knubie/vim-kitty-navigator" },
+        { "nvim-treesitter/nvim-treesitter-context" },
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.

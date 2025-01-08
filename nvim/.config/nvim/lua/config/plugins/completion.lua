@@ -31,7 +31,7 @@ return {
             },
 
             completion = {
-                list = { selection = "manual" },
+                list = { selection = { preselect = false, auto_insert = false } },
                 accept = { auto_brackets = { enabled = true }, },
             },
             signature = { enabled = true }

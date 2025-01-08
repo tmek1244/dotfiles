@@ -26,6 +26,7 @@ vim.keymap.set("n", "N", "Nzzzv", opts)
 
 vim.keymap.set("x", "<leader>p", "\"_dP", opts)
 
+-- requires xclip if using X11 or wl-clipboard for wayland
 vim.keymap.set("n", "<leader>y", "\"+y", opts)
 vim.keymap.set("v", "<leader>y", "\"+y", opts)
 vim.keymap.set("n", "<leader>Y", "\"+Y", opts)
