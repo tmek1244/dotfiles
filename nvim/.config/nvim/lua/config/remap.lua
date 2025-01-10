@@ -5,8 +5,8 @@ vim.keymap.set("n", "<C-s>", ":w<cr>", opts)
 vim.keymap.set("i", "<C-s>", "<esc>:w<cr>", opts)
 
 vim.keymap.set("n", "<C-h>", ":KittyNavigateLeft<CR>", opts)
-vim.keymap.set("n", "<C-j>", ":KittyNavigateUp<CR>", opts)
-vim.keymap.set("n", "<C-k>", ":KittyNavigateDown<CR>", opts)
+vim.keymap.set("n", "<C-j>", ":KittyNavigateDown<CR>", opts)
+vim.keymap.set("n", "<C-k>", ":KittyNavigateUp<CR>", opts)
 vim.keymap.set("n", "<C-l>", ":KittyNavigateRight<CR>", opts)
 
 vim.keymap.set("n", "<leader>q", ":q<cr>", opts)

@@ -2,7 +2,7 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
-        dependencies = { 
+        dependencies = {
             'nvim-lua/plenary.nvim',
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
             -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' }
@@ -10,15 +10,15 @@ return {
         config = function()
             require('telescope').setup {
                 pickers = {
-                  find_files = {
-                    -- theme = "dropdown"
-                  }
+                    find_files = {
+                        -- theme = "dropdown"
+                    }
                 },
                 extensions = {
-                  fzf = {}
+                    fzf = {}
                 }
             }
-        
+
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('noice')
 
@@ -31,8 +31,16 @@ return {
             end, {})
             vim.keymap.set('n', '<C-p>', builtin.git_files, {})
             vim.keymap.set('n', '<leader>fg', builtin.git_status, {})
-    
+
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "TelescopePreviewerLoaded",
+                callback = function(args)
+                    vim.wo.wrap = true
+                end,
+            })
+
             require "config.telescope.multigrep".setup()
         end
     }
 }
+
