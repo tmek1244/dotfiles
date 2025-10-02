@@ -20,8 +20,12 @@ return {
                     'snippet_forward',
                     'fallback'
                 },
-                cmdline = {
-                    preset = 'enter',
+            },
+            cmdline = {
+                keymap = { preset = 'enter' },
+                completion = {
+                    menu = { auto_show = true },
+                    list = { selection = { preselect = false } },
                 },
             },
 

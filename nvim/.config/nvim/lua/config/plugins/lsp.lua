@@ -23,7 +23,7 @@ return {
                     'html',
                     'pyright',
                     'pylsp',
-                    'gopls',
+                    -- 'gopls',
                     'lua_ls',
                 },
                 handlers = {

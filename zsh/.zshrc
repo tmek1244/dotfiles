@@ -60,7 +60,10 @@ bindkey '^[[1;5A' history-search-backward
 bindkey '^[[1;5B' history-search-forward
 
 export PATH="$HOME/.local/bin:/usr/local/go/bin":$PATH
-export PATH=$PATH:$(go env GOPATH)/bin
+
+if command -v go &> /dev/null; then
+  export PATH=$PATH:$(go env GOPATH)/bin
+fi
 
 if command -v bat &> /dev/null; then
   alias cat="bat -pp --theme \"Visual Studio Dark+\""
