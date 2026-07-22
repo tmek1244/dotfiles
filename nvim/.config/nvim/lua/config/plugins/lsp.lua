@@ -15,6 +15,12 @@ return {
             },
         },
         config = function()
+            -- Merged into every server config. mason-lspconfig v2 enables each
+            -- installed server itself, so there is no per-server setup() call.
+            vim.lsp.config('*', {
+                capabilities = require('blink.cmp').get_lsp_capabilities(),
+            })
+
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 ensure_installed = {
@@ -22,19 +28,12 @@ return {
                     'eslint',
                     'html',
                     'pyright',
-                    'pylsp',
+                    'clangd',
+                    'terraformls',
                     -- 'gopls',
                     'lua_ls',
                 },
-                handlers = {
-                    function(server_name)
-                        require('lspconfig')[server_name].setup({})
-                    end,
-                }
             })
-
-            local capabilities = require('blink.cmp').get_lsp_capabilities()
-            require("lspconfig").lua_ls.setup { capabilites = capabilities }
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP actions',

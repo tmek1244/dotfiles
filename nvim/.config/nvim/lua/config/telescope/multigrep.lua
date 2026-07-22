@@ -27,11 +27,9 @@ local live_multigrep = function(opts)
         table.insert(args, pieces[2])
       end
 
-      ---@diagnostic disable-next-line: deprecated
-      return vim.tbl_flatten {
-        args,
-        { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--hidden" },
-      }
+      return vim.list_extend(args, {
+        "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--hidden",
+      })
     end,
     entry_maker = make_entry.gen_from_vimgrep(opts),
     cwd = opts.cwd,

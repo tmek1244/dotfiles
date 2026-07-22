@@ -1,4 +1,5 @@
-vim.g.mapleader = " "
+-- mapleader is set in config/lazy.lua, before lazy.nvim loads.
+vim.g.editorconfig = false
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -33,12 +34,15 @@ vim.opt.splitright = true
 
 vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+-- Strip trailing whitespace on save. `keeppatterns` stops the substitution from
+-- landing in the search register, winsaveview keeps the scroll position too.
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
     pattern = { "*" },
     callback = function()
-        local r,c = unpack(vim.api.nvim_win_get_cursor(0))
-        vim.cmd [[%s/\s\+$//e]]
-        vim.api.nvim_win_set_cursor(0, {r,c})
+        if not vim.bo.modifiable or vim.bo.buftype ~= "" then return end
+        local view = vim.fn.winsaveview()
+        vim.cmd [[keeppatterns %s/\s\+$//e]]
+        vim.fn.winrestview(view)
     end
 })
 
