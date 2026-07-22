@@ -30,8 +30,15 @@ require("lazy").setup({
         -- { import = "lazyvim.plugins.extras.editor.fzf" },
         -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
         { import = "config.plugins" },
-        { "knubie/vim-kitty-navigator" },
-        { "nvim-treesitter/nvim-treesitter-context" },
+        {
+            "knubie/vim-kitty-navigator",
+            -- The <C-hjkl> maps in config/remap.lua call these commands.
+            cmd = { "KittyNavigateLeft", "KittyNavigateDown", "KittyNavigateUp", "KittyNavigateRight" },
+        },
+        {
+            "nvim-treesitter/nvim-treesitter-context",
+            event = { "BufReadPost", "BufNewFile" },
+        },
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.

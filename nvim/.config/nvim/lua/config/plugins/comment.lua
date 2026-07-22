@@ -2,6 +2,7 @@ return {
     {
         'numToStr/Comment.nvim',
         enabled = true,
+        event = "VeryLazy",
         opts = {
             -- add any options here
         },

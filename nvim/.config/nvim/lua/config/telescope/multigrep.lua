@@ -44,8 +44,7 @@ local live_multigrep = function(opts)
   }):find()
 end
 
-M.setup = function()
-  vim.keymap.set("n", "<leader>fs", live_multigrep)
-end
+-- Exposed so the keymap can live in the telescope lazy spec.
+M.live_multigrep = live_multigrep
 
 return M

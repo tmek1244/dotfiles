@@ -1,8 +1,10 @@
 return {
 	{
-		"catppuccin/nvim", 
-        name = "catppuccin", 
+		"catppuccin/nvim",
+        name = "catppuccin",
         priority = 1000,
+        lazy = false, -- the colorscheme has to be there before the first redraw
+
 		config = function()
 			require("catppuccin").setup({
                 flavour = "macchiato",
