@@ -17,6 +17,8 @@ return {
                         'stylua',
                         'prettierd',
                         'ansible-lint',
+                        -- Deliberately absent: mypy and flake8. They come from the
+                        -- project's own virtualenv, see config/python.lua.
                     },
                     run_on_start = true,
                 },
@@ -40,9 +42,44 @@ return {
 
             -- Ruff handles linting/imports; pyright owns types. Turning off ruff's
             -- hover stops the two servers fighting over the hover window.
+            --
+            -- In a project that ships flake8/mypy those two would report the same
+            -- problems in slightly different words, so each server steps aside for
+            -- the tool the project actually uses (see config/python.lua). Both
+            -- servers keep everything else: ruff still formats and organizes
+            -- imports through conform, pyright still drives completion, hover and
+            -- go-to-definition. Delete a `before_init` to get the duplicates back.
+            local python = require('config.python')
+
             vim.lsp.config('ruff', {
                 on_attach = function(client)
                     client.server_capabilities.hoverProvider = false
+                end,
+                -- Ruff takes its global settings from initializationOptions, and
+                -- `params` is the copy that actually gets sent: the client has
+                -- already captured `config.init_options` by the time this runs.
+                before_init = function(params, config)
+                    if python.tool('flake8', config.root_dir) then
+                        local init_options = params.initializationOptions
+                        params.initializationOptions = vim.tbl_deep_extend('force',
+                            type(init_options) == 'table' and init_options or {},
+                            { settings = { lint = { enable = false } } })
+                    end
+                end,
+            })
+
+            vim.lsp.config('pyright', {
+                -- Same caveat one server up, mirrored: `client.settings` is a
+                -- snapshot of `config.settings` taken before `before_init`, so the
+                -- settings pyright answers `workspace/configuration` with can only
+                -- be changed on the client itself.
+                on_init = function(client)
+                    if python.tool('mypy', client.root_dir) then
+                        client.settings = vim.tbl_deep_extend('force', client.settings, {
+                            python = { analysis = { typeCheckingMode = 'off' } },
+                        })
+                        client:notify('workspace/didChangeConfiguration', { settings = client.settings })
+                    end
                 end,
             })
 
