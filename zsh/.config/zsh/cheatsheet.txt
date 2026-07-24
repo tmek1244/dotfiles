@@ -1,0 +1,56 @@
+# Directories
+z <query>            | jump to a dir you've visited before (frecency-ranked)
+zi <query>           | pick from visited dirs, fzf
+Ctrl-F  (or zf)      | pick from visited dirs + everything under $PWD
+Alt-C                | cd into a dir under $PWD (incl. never-visited)
+ks <name>            | launch a saved kitty session
+                     | (venvs activate on their own via direnv + .envrc)
+
+# History & completion
+Ctrl-R               | fuzzy history, pre-filtered by what you've typed
+Ctrl-Up / Ctrl-Down  | step through history entries with the same prefix
+Ctrl-Space           | accept the greyed-out inline suggestion
+Ctrl-O               | run this line, then load the one that followed it
+Ctrl-T               | insert a file path into the current command
+
+# Git (shell)
+gs / ga / gc / gp    | git status / add / commit / push
+m                    | git checkout master
+
+# Kitty
+Ctrl-Shift-Enter     | new window, same directory
+Ctrl-Shift-T         | new tab, same directory
+Ctrl-Shift-Q         | close tab
+Ctrl-H/J/K/L         | move between windows (passes through to nvim splits)
+Shift-Alt-arrows     | resize window
+Ctrl-Home            | reset window size
+Shift-Alt-1 .. 5     | go to tab 1-5
+F1                   | toggle stack layout (zoom one window)
+
+# Neovim - leader is Space
+<leader>             | which-key popup: every mapping, live
+<leader>?            | mappings for this buffer only
+<leader>ff           | find files
+Ctrl-P               | find git files
+<leader>fs           | live multigrep (pattern  file  !exclude)
+<leader>fg           | git status
+<leader>fb           | git branches, most recent first
+<leader>e            | file tree
+<leader>gv           | diffview (working tree)
+<leader>gh           | repo history
+<leader>gf           | history of current file
+<leader>gd           | show diagnostic under cursor
+<leader>gl           | run linters on buffer
+<leader>hn / hN      | next / previous git hunk
+<leader>hh / hr      | preview / reset hunk
+<leader>y            | yank to system clipboard
+<leader>q            | quit
+Ctrl-S               | save
+Alt-Up / Alt-Down    | move line or selection
+
+# Telescope git branches
+Enter                | checkout
+Ctrl-S               | switch
+Ctrl-A               | create
+Alt-D                | delete
+Ctrl-D / Ctrl-U      | scroll the preview

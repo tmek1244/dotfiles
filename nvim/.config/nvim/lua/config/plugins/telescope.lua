@@ -32,6 +32,33 @@ return {
                 desc = 'Git status',
             },
             {
+                '<leader>fb',
+                function()
+                    local actions = require('telescope.actions')
+                    require('telescope.builtin').git_branches({
+                        -- `pattern` is passed as the last argv to `git for-each-ref`,
+                        -- where git still parses it as an option. Telescope itself
+                        -- passes no --sort, so branches would come out alphabetical.
+                        pattern = '--sort=-committerdate',
+                        -- The picker sizes its columns to the longest branch name,
+                        -- so a side-by-side preview pushes author/date out of view.
+                        -- Stacking gives the results the full window width.
+                        layout_strategy = 'vertical',
+                        layout_config = { preview_height = 0.4 },
+                        -- Composed after the picker's own mappings, so these win.
+                        -- The picker takes <C-d> for delete-branch, shadowing the
+                        -- default preview scroll; give the key back and put the
+                        -- destructive action somewhere it can't be hit by reflex.
+                        attach_mappings = function(_, map)
+                            map({ 'i', 'n' }, '<C-d>', actions.preview_scrolling_down)
+                            map({ 'i', 'n' }, '<M-d>', actions.git_delete_branch)
+                            return true
+                        end,
+                    })
+                end,
+                desc = 'Git branches (recent first)',
+            },
+            {
                 '<leader>fs',
                 function() require('config.telescope.multigrep').live_multigrep() end,
                 desc = 'Live multigrep (pattern␣␣file␣␣!exclude)',
