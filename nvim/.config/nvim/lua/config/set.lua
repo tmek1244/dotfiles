@@ -11,6 +11,15 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
+-- Treesitter folding. Safe to set globally: foldexpr() yields level 0 for
+-- buffers with no parser or no folds query, which just means no folds.
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- Empty foldtext keeps the folded line's own syntax highlighting.
+vim.opt.foldtext = ""
+-- Open every fold on load; fold on demand rather than the other way round.
+vim.opt.foldlevelstart = 99
+
 vim.opt.wrap = true
 
 vim.opt.swapfile = false

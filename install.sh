@@ -16,6 +16,13 @@ chsh -s $(which zsh)
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 ln -s /opt/nvim-linux-x86_64/bin/nvim ~/.local/bin
 
+# nvim-treesitter's `main` branch builds parsers with the tree-sitter CLI and
+# needs >= 0.26.1, newer than apt carries. The npm package is a different build
+# and unsupported, so take the release binary.
+curl -fsSL https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.11/tree-sitter-linux-x64.gz \
+    | gunzip > ~/.local/bin/tree-sitter
+chmod +x ~/.local/bin/tree-sitter
+
 sudo apt-get install ripgrep
 sudo apt-get install fzf zoxide fd-find direnv
 # Debian ships fd as fdfind; the fzf/zf config looks for `fd`.
