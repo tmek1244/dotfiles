@@ -25,6 +25,14 @@ return {
                 mode = { 'n', 'x' },
                 desc = 'Format buffer',
             },
+            {
+                '<leader>xf',
+                function()
+                    require('conform').format({ async = true, lsp_format = lsp_format_for() })
+                end,
+                mode = { 'n', 'x' },
+                desc = 'Format buffer',
+            },
         },
         config = function()
             require('conform').setup({

@@ -38,7 +38,7 @@ return {
                 callback = lint_buffer,
             })
 
-            vim.keymap.set('n', '<leader>gl', lint_buffer, { desc = 'Run linters on buffer' })
+            vim.keymap.set('n', '<leader>xl', lint_buffer, { desc = 'Run linters on buffer' })
         end,
     },
 }

@@ -126,7 +126,7 @@ return {
                 desc = 'LSP actions',
                 callback = function(event)
                     local opts = { buffer = event.buf }
-                    vim.keymap.set("n", "<leader>gd", function() vim.diagnostic.open_float() end, opts)
+                    vim.keymap.set("n", "<leader>xd", function() vim.diagnostic.open_float() end, opts)
 
                     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
                     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)

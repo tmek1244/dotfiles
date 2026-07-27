@@ -4,12 +4,17 @@ return {
         event = "VeryLazy",
         opts = {
             preset = "helix",
+            -- Grouped by task rather than by which plugin happens to provide it:
+            -- everything git lives under <leader>g whether it comes from
+            -- telescope or diffview, and <leader>x covers acting on the code in
+            -- front of you (format, lint, diagnostics).
             spec = {
                 { "<leader>f", group = "find" },
+                { "<leader>g", group = "git" },
                 { "<leader>h", group = "git hunk" },
-                { "<leader>g", group = "git / diagnostics" },
                 { "<leader>n", group = "noice" },
-                { "<leader>l", group = "look up" },
+                { "<leader>t", group = "tabs" },
+                { "<leader>x", group = "code / fix" },
             },
         },
         keys = {

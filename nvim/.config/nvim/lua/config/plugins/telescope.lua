@@ -30,12 +30,12 @@ return {
                 desc = 'Find git files',
             },
             {
-                '<leader>fg',
+                '<leader>gs',
                 function() require('telescope.builtin').git_status() end,
                 desc = 'Git status',
             },
             {
-                '<leader>fb',
+                '<leader>gb',
                 function()
                     local actions = require('telescope.actions')
                     require('telescope.builtin').git_branches({
