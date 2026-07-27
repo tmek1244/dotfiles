@@ -6,8 +6,8 @@ return {
         dependencies = {
             'saghen/blink.cmp',
             'b0o/SchemaStore.nvim',
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
+            'mason-org/mason.nvim',
+            'mason-org/mason-lspconfig.nvim',
             {
                 -- mason-lspconfig only manages servers; formatters and linters
                 -- need declaring separately so the repo stays reproducible.
