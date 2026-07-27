@@ -21,6 +21,15 @@ return {
         config = function()
             require("nvim-treesitter").install(parsers)
 
+            --- Whether `lang` has a usable `name` query. query.get() compiles the
+            --- query against the grammar, so it throws when a parser and the
+            --- queries disagree about node names -- what a parser left over from
+            --- an older nvim-treesitter looks like.
+            local function query_ok(lang, name)
+                local ok, query = pcall(vim.treesitter.query.get, lang, name)
+                return ok and query ~= nil
+            end
+
             -- `main` only ships parsers and queries; wiring them to the features
             -- Nvim builds on top is the config's job now.
             vim.api.nvim_create_autocmd("FileType", {
@@ -31,11 +40,18 @@ return {
                         return
                     end
 
+                    -- start() switches 'syntax' off, so handing it a language
+                    -- whose highlights query does not load costs the buffer all
+                    -- of its colour rather than falling back to the regex syntax.
+                    if not query_ok(lang, "highlights") then
+                        return
+                    end
+
                     vim.treesitter.start(ev.buf, lang)
 
                     -- Only for languages that ship an indents query, so the rest
                     -- keep whatever indent Nvim's own ftplugin set up.
-                    if vim.treesitter.query.get(lang, "indents") then
+                    if query_ok(lang, "indents") then
                         vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
                     end
                 end,
