@@ -66,9 +66,28 @@ return {
                 function() require('config.telescope.multigrep').live_multigrep() end,
                 desc = 'Live multigrep (pattern␣␣file␣␣!exclude)',
             },
+            -- Reopen a picker where it was left: same prompt, same results, same
+            -- multi selections. Works for every picker above, multigrep included.
+            {
+                '<leader>fr',
+                function() require('telescope.builtin').resume() end,
+                desc = 'Resume last picker',
+            },
+            {
+                '<leader>fp',
+                function() require('telescope.builtin').pickers() end,
+                desc = 'Previous pickers',
+            },
         },
         config = function()
             require('telescope').setup {
+                defaults = {
+                    -- Keep enough history for <leader>fp to be worth opening;
+                    -- the default of 1 only ever holds the picker <leader>fr
+                    -- would resume anyway. Each one keeps its results and multi
+                    -- selections in memory, capped at limit_entries (1000).
+                    cache_picker = { num_pickers = 10 },
+                },
                 pickers = {
                     find_files = {
                         -- theme = "dropdown"
