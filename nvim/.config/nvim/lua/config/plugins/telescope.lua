@@ -1,7 +1,10 @@
 return {
     {
         'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
+        -- Latest release rather than a branch: 0.1.x predates the nvim-treesitter
+        -- `main` rewrite and drives previews through the API that branch dropped,
+        -- so its previews raise `ft_to_lang (a nil value)` on every file.
+        version = '*',
         cmd = 'Telescope',
         dependencies = {
             'nvim-lua/plenary.nvim',
