@@ -41,6 +41,16 @@ vim.opt.updatetime = 50
 
 vim.opt.splitright = true
 
+-- Jumping to a file that is already on screen goes to the window showing it
+-- rather than loading it a second time in the current one. Covers quickfix and
+-- location list jumps (`<M-j>`, <CR> in the list), :sbuffer and :drop; LSP and
+-- telescope have their own equivalents in lua/config/plugins.
+--
+-- "usetab" is deliberately absent: a tab is a task (see config/remap.lua), so a
+-- jump should never drag you out of the one you are in. "uselast" is the
+-- default and only repeated here because setting the option drops it.
+vim.opt.switchbuf = "useopen,uselast"
+
 vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- Nvim ships no detection for Jinja templates, and ansible-language-server only

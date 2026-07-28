@@ -87,6 +87,26 @@ return {
                     -- would resume anyway. Each one keeps its results and multi
                     -- selections in memory, capped at limit_entries (1000).
                     cache_picker = { num_pickers = 10 },
+                    -- Which window the selection opens in. Telescope always
+                    -- uses the window the picker was started from, so picking a
+                    -- file that is already visible in a split loads it twice;
+                    -- hand it that split instead. 0 means "keep the default".
+                    --
+                    -- Current tab page only, matching 'switchbuf' in config/set.lua.
+                    get_selection_window = function(_, entry)
+                        local path = entry.path or entry.filename
+                        path = path and vim.fn.fnamemodify(path, ':p')
+                        if not path and not entry.bufnr then
+                            return 0
+                        end
+                        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+                            local buf = vim.api.nvim_win_get_buf(win)
+                            if buf == entry.bufnr or (path and vim.api.nvim_buf_get_name(buf) == path) then
+                                return win
+                            end
+                        end
+                        return 0
+                    end,
                 },
                 pickers = {
                     find_files = {

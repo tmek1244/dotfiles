@@ -122,6 +122,52 @@ return {
                 automatic_enable = { exclude = { 'stylua' } },
             })
 
+            -- Land in the window that already shows the target file instead of
+            -- pulling it into the current one. `vim.lsp.buf.definition({
+            -- reuse_win = true })` does this too, but it takes the first window
+            -- from any tab page, and a tab is a task here (see config/remap.lua),
+            -- so the search stops at the current tab -- the rule 'switchbuf'
+            -- applies to quickfix jumps.
+            --
+            -- Everything below the window pick is what the built-in handler does
+            -- for a single location, kept so <C-o> and <C-t> still come back.
+            local function jump(method)
+                return function()
+                    vim.lsp.buf[method]({
+                        on_list = function(list)
+                            if #list.items > 1 then
+                                vim.fn.setqflist({}, ' ', list)
+                                vim.cmd('botright copen')
+                                return
+                            end
+
+                            local item = list.items[1]
+                            local buf = item.bufnr or vim.fn.bufadd(item.filename)
+                            local win = vim.iter(vim.api.nvim_tabpage_list_wins(0)):find(function(w)
+                                return vim.api.nvim_win_get_buf(w) == buf
+                            end)
+
+                            vim.cmd("normal! m'") -- jumplist
+                            vim.fn.settagstack(vim.fn.win_getid(), {
+                                items = { {
+                                    tagname = vim.fn.expand('<cword>'),
+                                    from = { vim.fn.bufnr('%'), vim.fn.line('.'), vim.fn.col('.'), 0 },
+                                } },
+                            }, 't')
+
+                            vim.bo[buf].buflisted = true
+                            if win then
+                                vim.api.nvim_set_current_win(win)
+                            else
+                                vim.api.nvim_win_set_buf(0, buf)
+                            end
+                            vim.api.nvim_win_set_cursor(0, { item.lnum, math.max(item.col - 1, 0) })
+                            vim.cmd('normal! zv') -- open folds over the target
+                        end,
+                    })
+                end
+            end
+
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP actions',
                 callback = function(event)
@@ -129,10 +175,12 @@ return {
                     vim.keymap.set("n", "<leader>xd", function() vim.diagnostic.open_float() end, opts)
 
                     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-                    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-                    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-                    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-                    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+                    vim.keymap.set('n', 'gd', jump('definition'), opts)
+                    vim.keymap.set('n', 'gD', jump('declaration'), opts)
+                    vim.keymap.set('n', 'gi', jump('implementation'), opts)
+                    vim.keymap.set('n', 'go', jump('type_definition'), opts)
+                    -- References are a list by nature, so they keep the default
+                    -- quickfix handler; jumping out of it obeys 'switchbuf'.
                     vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
                     vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
                     vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
