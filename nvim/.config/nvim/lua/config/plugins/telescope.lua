@@ -53,6 +53,13 @@ return {
                         -- default preview scroll; give the key back and put the
                         -- destructive action somewhere it can't be hit by reflex.
                         attach_mappings = function(_, map)
+                            -- Entries carry the ref with its remote still attached,
+                            -- so the default action runs `git checkout origin/foo`
+                            -- on a remote-only branch and lands in detached HEAD.
+                            -- git_switch_branch strips the remote first, so `git
+                            -- switch foo` gets to DWIM a local tracking branch the
+                            -- way typing it out does. Same behaviour for locals.
+                            actions.select_default:replace(actions.git_switch_branch)
                             map({ 'i', 'n' }, '<C-d>', actions.preview_scrolling_down)
                             map({ 'i', 'n' }, '<M-d>', actions.git_delete_branch)
                             return true
