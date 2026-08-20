@@ -101,6 +101,83 @@ return {
                 },
             })
 
+            -- One terraform-ls per module directory instead of one per repo.
+            --
+            -- The upstream markers are `{ '.terraform', '.git' }`, and
+            -- `vim.fs.root` takes the first marker that matches anywhere upward
+            -- rather than the nearest directory holding any of them -- so a
+            -- module that has never been `terraform init`ed falls through to
+            -- `.git` and roots the server at the top of the repo. terraform-ls
+            -- then indexes every module underneath and keeps a decoded copy of
+            -- each one's provider schemas, which is where the gigabytes come
+            -- from: the aws and google schemas run to hundreds of MB apiece.
+            --
+            -- Matching any *.tf file roots each server at the directory the file
+            -- lives in, so opening nvim at the repo root loads only the modules
+            -- actually visited. `.terraform` stays ahead of it so an initialized
+            -- module still wins from a buffer in one of its subdirectories.
+            vim.lsp.config('terraformls', {
+                root_markers = {
+                    { '.terraform', '.terraform.lock.hcl' },
+                    function(name)
+                        return name:match('%.tf$') ~= nil
+                    end,
+                },
+                -- Upstream enables codelens here. Its only lens is the reference
+                -- count, which needs the cross-module reference graph refreshed
+                -- on every edit -- the CPU half of the same problem. Delete this
+                -- to get the counts back.
+                on_attach = function(_, bufnr)
+                    vim.lsp.codelens.enable(false, { bufnr = bufnr })
+                end,
+            })
+
+            -- Modules still pile up across a long session: each one visited keeps
+            -- its server and its schemas resident long after the buffer is out of
+            -- sight. `:TerraformPrune` stops the ones that are not on screen.
+            vim.api.nvim_create_user_command('TerraformPrune', function()
+                local onscreen = {}
+                for _, win in ipairs(vim.api.nvim_list_wins()) do
+                    onscreen[vim.api.nvim_win_get_buf(win)] = true
+                end
+
+                local stopped = {}
+                for _, client in ipairs(vim.lsp.get_clients({ name = 'terraformls' })) do
+                    local visible = false
+                    for buf in pairs(client.attached_buffers) do
+                        visible = visible or onscreen[buf] or false
+                    end
+                    if not visible then
+                        table.insert(stopped, vim.fn.fnamemodify(client.root_dir, ':~:.'))
+                        -- Forced: terraform-ls sits on a graceful shutdown long
+                        -- enough that the memory never comes back, and it holds
+                        -- nothing but an index, so there is nothing to lose.
+                        client:stop(true)
+                    end
+                end
+
+                vim.notify(#stopped == 0 and 'terraform-ls: nothing to prune'
+                    or ('terraform-ls: stopped ' .. table.concat(stopped, ', ')))
+            end, { desc = 'Stop terraform-ls for modules that are not on screen' })
+
+            -- `vim.lsp.enable` only attaches on FileType, so a pruned module would
+            -- stay dead until its file was reloaded. Re-fire that autocmd for a
+            -- terraform buffer that has lost its server, so walking back into one
+            -- brings it up again.
+            vim.api.nvim_create_autocmd('BufEnter', {
+                group = vim.api.nvim_create_augroup('config.terraform_reattach', {}),
+                pattern = { '*.tf', '*.tfvars' },
+                callback = function(ev)
+                    if #vim.lsp.get_clients({ bufnr = ev.buf, name = 'terraformls' }) > 0 then
+                        return
+                    end
+                    pcall(vim.api.nvim_exec_autocmds, 'FileType', {
+                        group = 'nvim.lsp.enable',
+                        buffer = ev.buf,
+                    })
+                end,
+            })
+
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 ensure_installed = {
