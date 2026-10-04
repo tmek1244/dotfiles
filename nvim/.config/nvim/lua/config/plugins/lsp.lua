@@ -101,28 +101,25 @@ return {
                 },
             })
 
-            -- One terraform-ls per module directory instead of one per repo.
+            -- One terraform-ls per repo, not per module directory.
             --
-            -- The upstream markers are `{ '.terraform', '.git' }`, and
-            -- `vim.fs.root` takes the first marker that matches anywhere upward
-            -- rather than the nearest directory holding any of them -- so a
-            -- module that has never been `terraform init`ed falls through to
-            -- `.git` and roots the server at the top of the repo. terraform-ls
-            -- then indexes every module underneath and keeps a decoded copy of
-            -- each one's provider schemas, which is where the gigabytes come
-            -- from: the aws and google schemas run to hundreds of MB apiece.
+            -- Every server loads its own copy of the provider schemas (~150 MB
+            -- for google, ~550 MB for aws), so a server per module directory
+            -- costs that again for each module visited and the gigabytes pile up
+            -- over a session. One server shares them: five cloud-foundation-fabric
+            -- modules took 168 MB in a repo-wide server and 746 MB in five
+            -- per-directory ones. terraform-ls 0.39 only indexes the modules
+            -- that are opened (and the ones they call), so rooting at the top of
+            -- a large repo no longer means indexing all of it.
             --
-            -- Matching any *.tf file roots each server at the directory the file
-            -- lives in, so opening nvim at the repo root loads only the modules
-            -- actually visited. `.terraform` stays ahead of it so an initialized
-            -- module still wins from a buffer in one of its subdirectories.
+            -- The upstream markers are `{ '.terraform', '.git' }`, which would
+            -- still start one server per initialized module, so only `.git` is
+            -- used. Outside a repo the file's own directory is the root.
             vim.lsp.config('terraformls', {
-                root_markers = {
-                    { '.terraform', '.terraform.lock.hcl' },
-                    function(name)
-                        return name:match('%.tf$') ~= nil
-                    end,
-                },
+                root_dir = function(bufnr, on_dir)
+                    on_dir(vim.fs.root(bufnr, '.git')
+                        or vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)))
+                end,
                 -- Upstream enables codelens here. Its only lens is the reference
                 -- count, which needs the cross-module reference graph refreshed
                 -- on every edit -- the CPU half of the same problem. Delete this
@@ -132,9 +129,17 @@ return {
                 end,
             })
 
-            -- Modules still pile up across a long session: each one visited keeps
-            -- its server and its schemas resident long after the buffer is out of
-            -- sight. `:TerraformPrune` stops the ones that are not on screen.
+            -- -- A local tflint build with the langserver memory/speed fixes, used
+            -- -- instead of Mason's when it is installed. Mason's 0.64.0 grows to
+            -- -- ~1.7 GB after 50 edits of a large stack; the build stays ~90 MB.
+            -- local tflint_dev = vim.fn.expand('~/.local/bin/tflint-dev')
+            -- if vim.fn.executable(tflint_dev) == 1 then
+            --     vim.lsp.config('tflint', { cmd = { tflint_dev, '--langserver' } })
+            -- end
+            --
+            -- -- Repos visited during a long session keep their server and schemas
+            -- -- resident long after their buffers are out of sight.
+            -- -- `:TerraformPrune` stops the ones that are not on screen.
             vim.api.nvim_create_user_command('TerraformPrune', function()
                 local onscreen = {}
                 for _, win in ipairs(vim.api.nvim_list_wins()) do
