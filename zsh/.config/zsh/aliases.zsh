@@ -12,13 +12,19 @@ alias rm='rm -i'
 
 # easier to read disk
 alias df='df -h'     # human-readable sizes
-alias free='free -m' # show sizes in MB
+if [[ "$OSTYPE" == linux* ]]; then
+  alias free='free -m' # show sizes in MB
 
-# get top process eating memory
-alias psmem='ps auxf | sort -nr -k 4 | head -5'
+  # get top process eating memory
+  alias psmem='ps auxf | sort -nr -k 4 | head -5'
 
-# get top process eating cpu ##
-alias pscpu='ps auxf | sort -nr -k 3 | head -5'
+  # get top process eating cpu ##
+  alias pscpu='ps auxf | sort -nr -k 3 | head -5'
+else
+  # macOS ps has no forest view (f)
+  alias psmem='ps aux | sort -nr -k 4 | head -5'
+  alias pscpu='ps aux | sort -nr -k 3 | head -5'
+fi
 
 alias m="git checkout master"
 alias gs="git status"
