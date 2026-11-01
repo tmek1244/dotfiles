@@ -24,9 +24,13 @@ shortcuts take the keys first and have to be changed by hand.
 | Input Sources | Select next source `⌃⌥Space` | **Off** | same |
 | Mission Control | Mission Control `⌃↑` | **Off** | zsh history search, nvim `<C-Up>` resize |
 | Mission Control | Application windows `⌃↓` | **Off** | zsh history search, nvim `<C-Down>` resize |
-| Mission Control | Move left a space `⌃←` | **Rebind to `⌃⌥⇧⌘←`** | frees Ctrl+← in kitty; Karabiner sends this for Super+PgUp |
-| Mission Control | Move right a space `⌃→` | **Rebind to `⌃⌥⇧⌘→`** | frees Ctrl+→ in kitty; Karabiner sends this for Super+PgDn |
+| Mission Control | Move left a space `⌃←` | **Rebind to `⌃⌥⇧⌘←`**: record it by pressing **Win+Alt+←** | frees Ctrl+← in kitty; Karabiner sends this for the desktop shortcuts |
+| Mission Control | Move right a space `⌃→` | **Rebind to `⌃⌥⇧⌘→`**: record it by pressing **Win+Alt+→** | frees Ctrl+→ in kitty; Karabiner sends this for the desktop shortcuts |
 | Spotlight | Show Spotlight search `⌘Space` | **Keep** | Karabiner sends it when Win is tapped on its own |
+
+When recording a shortcut, Karabiner is already changing your keys, so press the
+shortcut you'll actually use (e.g. Win+Alt+←), not the keys printed in the table.
+Pressing Ctrl+Alt+Shift+Win+← would record `⌥⇧⌘←`, because Ctrl turns into ⌘.
 
 Also under Keyboard: turn on **"Use F1, F2, etc. keys as standard function
 keys"** (kitty uses F1 to toggle the stack layout). In Karabiner's own

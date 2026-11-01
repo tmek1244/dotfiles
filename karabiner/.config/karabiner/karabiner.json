@@ -824,6 +824,22 @@
                                         ]
                                     }
                                 ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "# TODO Vikunja capture"
+                                    }
+                                ]
                             }
                         ]
                     },
