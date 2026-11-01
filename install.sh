@@ -13,7 +13,7 @@ chsh -s $(which zsh)
 
 ## relog
 
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1 --keep
 ln -s /opt/nvim-linux-x86_64/bin/nvim ~/.local/bin
 
 # nvim-treesitter's `main` branch builds parsers with the tree-sitter CLI and

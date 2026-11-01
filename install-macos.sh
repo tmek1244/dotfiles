@@ -13,7 +13,7 @@ brew install --cask kitty karabiner-elements rectangle alt-tab
 # becomes a symlink to the whole directory (Karabiner rewrites karabiner.json in place).
 stow zsh nvim kitty karabiner
 
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1 --keep
 
 # MesloLGS NF (font_family in kitty.conf, patched for powerlevel10k)
 for style in Regular Bold Italic "Bold Italic"; do

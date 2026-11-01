@@ -74,6 +74,7 @@ want the setting kept, or `git checkout` the file to discard it.
 | Ctrl+Win+↓ | Restore previous size | Rectangle (`⌃⌥⌫`) |
 | Shift+Win+← / → | Move window to the other monitor | Rectangle (`⌃⌥⌘←/→`) |
 | Win+PgUp / Win+PgDn | Previous / next desktop | needs the Mission Control rebind above |
+| Win+Alt+← / → | Previous / next desktop | same |
 | Ctrl+Alt+← / → | Previous / next desktop | same |
 | Ctrl+Alt+T | Open kitty | |
 | Alt+F4 | Close window | sends `⌘W` |
