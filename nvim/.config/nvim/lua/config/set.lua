@@ -22,6 +22,12 @@ vim.opt.foldlevelstart = 99
 
 vim.opt.wrap = true
 
+-- y/p/x/d/c use the system clipboard, so text moves freely between nvim and
+-- other apps. Needs xclip (X11) or wl-clipboard (Wayland) on Linux; macOS has
+-- pbcopy built in. For text that should stay inside nvim, see <leader>y/p in
+-- remap.lua.
+vim.opt.clipboard = "unnamedplus"
+
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"

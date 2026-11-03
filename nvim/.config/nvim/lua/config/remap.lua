@@ -23,12 +23,18 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
 vim.keymap.set("n", "n", "nzzzv", opts)
 vim.keymap.set("n", "N", "Nzzzv", opts)
 
-vim.keymap.set("x", "<leader>p", "\"_dP", opts)
-
--- requires xclip if using X11 or wl-clipboard for wayland
-vim.keymap.set("n", "<leader>y", "\"+y", opts)
-vim.keymap.set("v", "<leader>y", "\"+y", opts)
-vim.keymap.set("n", "<leader>Y", "\"+Y", opts)
+-- y/p already use the system clipboard ('clipboard' in set.lua). <leader>y/p
+-- use register "n instead, for text that should stay inside nvim and not
+-- overwrite what you copied elsewhere. (To paste over a selection without
+-- losing the clipboard, use plain P in visual mode.)
+local function nreg(mode, lhs, rhs, desc)
+    vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
+end
+nreg({ "n", "x" }, "<leader>y", '"ny', "Yank (nvim only)")
+nreg("n", "<leader>Y", '"nY', "Yank line (nvim only)")
+nreg("n", "<leader>p", '"np', "Paste after (nvim only)")
+nreg("n", "<leader>P", '"nP', "Paste before (nvim only)")
+nreg("x", "<leader>p", '"_d"nP', "Paste over selection (nvim only)")
 
 vim.keymap.set("n", "<leader>d", "\"_d", opts)
 vim.keymap.set("v", "<leader>d", "\"_d", opts)
