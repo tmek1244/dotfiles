@@ -265,9 +265,11 @@ return {
                     -- quickfix handler; jumping out of it obeys 'switchbuf'.
                     vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
                     vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-                    vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-                    -- <F3> formats via conform.nvim (with an LSP fallback), see plugins/conform.lua
-                    vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+                    -- <leader>xf formats via conform.nvim (with an LSP fallback), see plugins/conform.lua
+                    vim.keymap.set('n', '<leader>xr', vim.lsp.buf.rename,
+                        { buffer = event.buf, desc = 'Rename symbol' })
+                    vim.keymap.set({ 'n', 'x' }, '<leader>xa', vim.lsp.buf.code_action,
+                        { buffer = event.buf, desc = 'Code action' })
 
                     -- require("lsp_signature").on_attach({
                     -- toggle_key = '<A-l>',

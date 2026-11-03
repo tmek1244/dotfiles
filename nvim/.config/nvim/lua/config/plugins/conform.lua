@@ -18,14 +18,6 @@ return {
         cmd = { "ConformInfo", "FormatEnable", "FormatDisable" },
         keys = {
             {
-                '<F3>',
-                function()
-                    require('conform').format({ async = true, lsp_format = lsp_format_for() })
-                end,
-                mode = { 'n', 'x' },
-                desc = 'Format buffer',
-            },
-            {
                 '<leader>xf',
                 function()
                     require('conform').format({ async = true, lsp_format = lsp_format_for() })
@@ -57,7 +49,7 @@ return {
                     -- no_lsp_fallback above.
                 },
 
-                -- Off by default: <F3> formats on demand. `:FormatEnable` turns on
+                -- Off by default: <leader>xf formats on demand. `:FormatEnable` turns on
                 -- format-on-save, `:FormatDisable` turns it back off.
                 format_on_save = function(bufnr)
                     if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then

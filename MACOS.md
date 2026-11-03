@@ -13,6 +13,9 @@ shortcuts take the keys first and have to be changed by hand.
 - Karabiner asks for its **driver extension** and **Input Monitoring**
   permissions. Approve both in System Settings → Privacy & Security, or no
   rule will work.
+- **Rectangle → Settings → General → tick "Launch on login".** It's off by
+  default, so after a reboot the Win+arrow snapping does nothing until you start
+  Rectangle by hand. (Karabiner runs as a background service and starts on its own.)
 - Leave System Settings → Keyboard → Modifier Keys at the defaults. Karabiner
   already swaps the modifiers, and doing it in both places swaps them twice.
 
@@ -22,8 +25,8 @@ shortcuts take the keys first and have to be changed by hand.
 |---|---|---|---|
 | Input Sources | Select previous input source `⌃Space` | **Off** | zsh `autosuggest-accept` and Ctrl+Space in other apps |
 | Input Sources | Select next source `⌃⌥Space` | **Off** | same |
-| Mission Control | Mission Control `⌃↑` | **Off** | zsh history search, nvim `<C-Up>` resize |
-| Mission Control | Application windows `⌃↓` | **Off** | zsh history search, nvim `<C-Down>` resize |
+| Mission Control | Mission Control `⌃↑` | Off (optional) | Karabiner already sends Ctrl+↑ to kitty as F18, so this can't take it |
+| Mission Control | Application windows `⌃↓` | Off (optional) | same, via F19 |
 | Mission Control | Move left a space `⌃←` | **Rebind to `⌃⌥⇧⌘←`**: record it by pressing **Win+Alt+←** | frees Ctrl+← in kitty; Karabiner sends this for the desktop shortcuts |
 | Mission Control | Move right a space `⌃→` | **Rebind to `⌃⌥⇧⌘→`**: record it by pressing **Win+Alt+→** | frees Ctrl+→ in kitty; Karabiner sends this for the desktop shortcuts |
 | Spotlight | Show Spotlight search `⌘Space` | **Keep** | Karabiner sends it when Win is tapped on its own |
@@ -70,6 +73,7 @@ want the setting kept, or `git checkout` the file to discard it.
 | Keys | Does | Notes |
 |---|---|---|
 | Win (tapped alone) | Spotlight | apps, files, calculator; held with another key it is still ⌘ |
+| Win+Alt (tapped together) | Mission Control | all windows; Win+Alt with an arrow still switches desktops |
 | Win+L | Lock screen | sends `⌃⌘Q` |
 | Win+H | Minimize | sends `⌘M` |
 | Win+← / Win+→ | Left / right half | Rectangle (`⌃⌥←/→`); press again to cycle ½ → ⅔ → ⅓ |
@@ -82,13 +86,13 @@ want the setting kept, or `git checkout` the file to discard it.
 | Ctrl+Alt+← / → | Previous / next desktop | same |
 | Ctrl+Alt+T | Open kitty | |
 | Alt+F4 | Close window | sends `⌘W` |
-| Alt+Tab | Window switcher | AltTab app |
 | PrtSc | Screenshot tool | sends `⌘⇧5` |
 | Home / End | Start / end of line | outside kitty |
 | Ctrl+Home / Ctrl+End | Start / end of document | outside kitty |
 | Ctrl+← / → | Previous / next word | outside kitty (in kitty: real Ctrl+arrows) |
 | Ctrl+Backspace / Ctrl+Del | Delete word | outside kitty; kitty maps Ctrl+Backspace itself |
 | Ctrl+Tab / Ctrl+Space | Stay Ctrl | for browser tabs etc. |
+| Ctrl+↑ / Ctrl+↓ in kitty | History search by prefix | goes through F18/F19 so Mission Control can't catch it |
 | Ctrl+Shift+C / Ctrl+Shift+V | Copy / paste in kitty | same as Linux; Ctrl+C in kitty is still interrupt (SIGINT) |
 
 ## Quick check after setup

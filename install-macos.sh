@@ -7,7 +7,7 @@ brew install stow neovim tree-sitter-cli ripgrep fzf zoxide fd bat direnv
 # Mason installs ts_ls, eslint, html, pyright, yamlls, ansiblels and prettierd
 # through npm, and ansible-lint through a python venv -- without these they fail.
 brew install node python
-brew install --cask kitty karabiner-elements rectangle alt-tab
+brew install --cask kitty karabiner-elements rectangle
 
 # Stow karabiner BEFORE first launching Karabiner-Elements, so ~/.config/karabiner
 # becomes a symlink to the whole directory (Karabiner rewrites karabiner.json in place).
