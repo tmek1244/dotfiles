@@ -86,7 +86,8 @@ want the setting kept, or `git checkout` the file to discard it.
 | Ctrl+Alt+← / → | Previous / next desktop | same |
 | Ctrl+Alt+T | Open kitty | |
 | Alt+F4 | Close window | sends `⌘W` |
-| PrtSc | Screenshot tool | sends `⌘⇧5` |
+| PrtSc | Select an area, copy it to the clipboard | sends `⌃⌘⇧4` |
+| Shift+PrtSc / Ctrl+PrtSc | Screenshot tool | sends `⌘⇧5` |
 | Home / End | Start / end of line | outside kitty |
 | Ctrl+Home / Ctrl+End | Start / end of document | outside kitty |
 | Ctrl+← / → | Previous / next word | outside kitty (in kitty: real Ctrl+arrows) |
