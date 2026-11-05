@@ -73,7 +73,7 @@ want the setting kept, or `git checkout` the file to discard it.
 | Keys | Does | Notes |
 |---|---|---|
 | Win (tapped alone) | Spotlight | apps, files, calculator; held with another key it is still ⌘ |
-| Win+Alt (tapped together) | Mission Control | all windows; Win+Alt with an arrow still switches desktops |
+| Win+Space | Mission Control | overview of all windows |
 | Win+L | Lock screen | sends `⌃⌘Q` |
 | Win+H | Minimize | sends `⌘M` |
 | Win+← / Win+→ | Left / right half | Rectangle (`⌃⌥←/→`); press again to cycle ½ → ⅔ → ⅓ |
